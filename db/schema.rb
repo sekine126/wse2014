@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140714014842) do
+ActiveRecord::Schema.define(version: 20140714122458) do
+
+  create_table "procedures", force: true do |t|
+    t.integer  "number"
+    t.text     "detail"
+    t.integer  "sec"
+    t.boolean  "play",       default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "recipe_id"
+  end
+
+  add_index "procedures", ["recipe_id"], name: "index_procedures_on_recipe_id"
 
   create_table "recipes", force: true do |t|
     t.string   "name"
