@@ -1,2 +1,9 @@
-
 <h1>TOPページ（レシピの一覧検索ページ）</h1>
+
+<ul>
+  <% @recipes.each do |recipe| %>
+    <li>
+    <%= link_to recipe.name, recipe_path(recipe.id) %>
+    </li>
+  <% end %>
+</ul>

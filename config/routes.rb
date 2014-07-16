@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :recipes 
-  resources :procedures
+  resources :recipes do
+    resources :procedures
+  end
 
   # ルートの設定
   root 'recipes#index'
