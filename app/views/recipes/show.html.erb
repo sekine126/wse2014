@@ -1,5 +1,3 @@
-<h1>レシピの詳細画面</h1>
+<h1> <%= @recipe.name %>のレシピ </h1>
 
-<p><%= @recipe.name %></p>
-
-<%= link_to "Start", recipe_procedure_path(@recipe.id, @recipe.procedures.first.id) %>
+<%= link_to "スタート", recipe_procedure_path(@recipe.id, @recipe.procedures.first.id) %>

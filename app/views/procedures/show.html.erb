@@ -1,9 +1,14 @@
-<h1><%= @recipe.name %></h1>
+<h1> <%= @recipe.name %>の作り方 </h1>
 
 <ul>
   <li>手順<%= @procedure.number %></li>
   <li><%= @procedure.detail %></li>
-  <li>所要時間<%= @procedure.sec %>秒</li>
+  <li>動画時間<%= @procedure.sec %>秒</li>
 </ul>
 
-<%= link_to "次へ", recipe_procedure_path(@recipe.id, @procedure.id+1) %>
+<% if @procedures.last.id == @procedure.id %>
+  <%= link_to "レシピの詳細へ戻る", recipe_path(@recipe.id) %>
+<% else %>
+  <%= link_to "次の手順へ", recipe_procedure_path(@recipe.id, @procedure.id+1) %>
+<% end %>
+
