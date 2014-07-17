@@ -29,6 +29,9 @@ gem 'spring',        group: :development
 # Paperclip to store picture file
 gem "paperclip", "~> 4.1"
 
+# Web 上の RESTful API を ActiveRecord のモデルと同じようなインターフェースで利用可能にする
+gem 'activeresource'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -6,6 +6,14 @@
   <li>動画時間<%= @procedure.sec %>秒</li>
 </ul>
 
+<p>
+<% if @procedure.play %>
+  <iframe type="text/html" width="640" height="360" src=<%= @youtube[:url] %> frameborder="0" allowfullscreen></iframe>
+  <br>
+  動画時間:<%= @youtube[:duration] %>秒
+<% end %>
+</p>
+
 <% if @procedures.last.id == @procedure.id %>
   <%= link_to "レシピの詳細へ戻る", recipe_path(@recipe.id) %>
 <% else %>
