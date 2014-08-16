@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   # ルートの設定
   root 'recipes#index'
 
+  get '/ingredients/:id', :to => 'ingredients#show'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140714122458) do
+ActiveRecord::Schema.define(version: 20140815102224) do
+
+  create_table "ingredients", force: true do |t|
+    t.integer  "ingredient_id"
+    t.string   "name"
+    t.string   "genre"
+    t.decimal  "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "procedures", force: true do |t|
     t.integer  "number"
