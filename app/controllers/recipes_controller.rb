@@ -6,6 +6,7 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
+    @procedures = Procedure.where(recipe_id: params[:id])
   end
 
   def create
