@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
 
   resources :recipes do
-    resources :procedures
+    resources :procedures, :only => :show
   end
 
+  resources :procedures, :except => :show
   resources :foods
   resources :values
 
