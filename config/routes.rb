@@ -4,6 +4,9 @@ Rails.application.routes.draw do
     resources :procedures
   end
 
+  resources :foods
+  resources :values
+
   # ルートの設定
   root 'recipes#index'
 

@@ -1,0 +1,12 @@
+<h1>食材</h1>
+
+<ul>
+
+  <% @foods.each do |food| %>
+  	<%= check_box_tag "select[]", food[:id] %>
+  	<%= food[:name] %>
+  	(<%= food[:category]%>) <br>
+  <% end %>
+<br>
+  <%= link_to "next", new_value_path() %>
+</ul>

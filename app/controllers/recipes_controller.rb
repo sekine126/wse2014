@@ -8,4 +8,9 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
   end
 
+  def create
+  	render :text => params
+  	#@values = Value.where()
+  end
+
 end

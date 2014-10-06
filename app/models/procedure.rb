@@ -7,4 +7,9 @@ class Procedure < ActiveRecord::Base
     youtube = Youtube.video_info(keyword, sec)
   end
 
+  def new
+  	#render :text => params
+  	#@values = Value.where(id: params[:select])
+  end
+
 end

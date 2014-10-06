@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140815102224) do
+ActiveRecord::Schema.define(version: 20140817161039) do
+
+  create_table "foods", force: true do |t|
+    t.string   "name"
+    t.string   "category"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "ingredients", force: true do |t|
     t.integer  "ingredient_id"
@@ -43,5 +50,16 @@ ActiveRecord::Schema.define(version: 20140815102224) do
     t.integer  "pic_file_size"
     t.datetime "pic_updated_at"
   end
+
+  create_table "values", force: true do |t|
+    t.integer  "food_id"
+    t.integer  "recipe_id"
+    t.string   "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "values", ["food_id"], name: "index_values_on_food_id"
+  add_index "values", ["recipe_id"], name: "index_values_on_recipe_id"
 
 end

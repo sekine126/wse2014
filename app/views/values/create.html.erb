@@ -1,0 +1,20 @@
+<h1>value(create)</h1>
+
+<ul>
+
+<%= form_tag ('/recipes') do %>
+
+  <% @foods.each do |food| %>
+  	<%= food[:name] %>
+  	(<%= food[:category]%>):
+  	<%= text_field_tag :value %>
+  	<%= hidden_field :food_id, :value => food[:id] %>
+  	<br>
+  <% end %>
+  <br>
+
+  <%= submit_tag "submit" %>
+ <% end %>
+<br>
+
+</ul>

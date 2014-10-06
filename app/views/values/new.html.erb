@@ -1,0 +1,18 @@
+<h1>登録（食材）</h1>
+
+<ul>
+
+<%= form_for(@value) do |f| %>
+
+  <% @foods.each do |food| %>
+  	<%= check_box_tag "select[]", food[:id] %>
+  	<%= food[:name] %>
+  	(<%= food[:category]%>) <br>
+  <% end %>
+  <br>
+
+  <%= f.submit "submit" %>
+ <% end %>
+<br>
+
+</ul>
