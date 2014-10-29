@@ -9,7 +9,7 @@
 %>
 
 <%# valueの書き出し %>
-value:<br><br>
+使用食材:<br><br>
 <% @values.each do |value| %>
 	<%= value[:name] %>
 	(<%= value[:category]%>) :
@@ -21,7 +21,7 @@ value:<br><br>
 <br>
 
 <%# procedureの書き出し %>
-procedure:<br><br>
+手順:<br><br>
 <% if @procedures %>
 	<% @procedures.each do |procedure| %>
 		<% if procedure[:sec] != "0" %>	
@@ -52,10 +52,10 @@ procedure:<br><br>
 
 
 	<%= text_field_tag "procedure[][text]"  %>:
-	<%= number_field_tag "procedure[][sec]", 0 %>sec
+	<%= number_field_tag "procedure[][sec]", 0 %>秒
 	<br>
 
-	<%= submit_tag("add") %>
+	<%= submit_tag("手順の追加") %>
 <% end %>
 
-<%= link_to "next", new_recipe_path(:procedure => params[:procedure], :value => params[:value]) %>
+<%= link_to "次へ", new_recipe_path(:procedure => params[:procedure], :value => params[:value]) %>
