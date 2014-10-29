@@ -1,20 +1,31 @@
-<h1>登録（食材）</h1>
+<h1>values/new</h1>
 
-<ul>
+<%#
+"select"=>["1", "2"], 
+"commit"=>"submit", 
+"controller"=>"values", "action"=>"new"}
+%>
 
-<%= form_for(@value) do |f| %>
+<%= form_tag ('/procedures/new') do %>
 
   <% @foods.each do |food| %>
-  	<%= check_box_tag "select[]", food[:id] %>
   	<%= food[:name] %>
-  	(<%= food[:category]%>) <br>
+  	(<%= food[:category]%>):
+
+  	<%# 以下送信データ %>
+  	<%= text_field_tag "value[][val]", "value" %><br>
+
+  	<%= hidden_field_tag "food_id[]", food[:id] %>
+  	<%= hidden_field_tag "value[][food_id]", food[:id] %>
+  	<%= hidden_field_tag "value[][name]", food[:name] %>
+  	<%= hidden_field_tag "value[][category]", food[:category] %>
   <% end %>
   <br>
+
+  <%= submit_tag("next") %>
 
  <% end %>
 <br>
 
-
-</ul>
 
 <%= link_to "next", new_procedure_path %>

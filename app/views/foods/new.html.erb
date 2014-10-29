@@ -1,3 +1,14 @@
-<h1>登録（食材）</h1>
+<h1>foods/new</h1>
+
+<%= form_tag('/values/new') do %>
+	<% @foods.each do |food| %>
+		<%= check_box_tag "select[]", food[:id] %>
+		<%= food[:name] %>
+		(<%= food[:category]%>) <br>
+	<% end %>
+
+	<%= submit_tag("next") %>
+<% end %>
+
 
 <%= link_to "next", new_value_path %>

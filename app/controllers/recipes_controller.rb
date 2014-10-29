@@ -9,9 +9,8 @@ class RecipesController < ApplicationController
     @procedures = Procedure.where(recipe_id: params[:id])
   end
 
-  def create
-  	render :text => params
-  	#@values = Value.where()
+  def new
+    render :text => params
   end
 
 end

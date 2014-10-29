@@ -11,6 +11,11 @@ Rails.application.routes.draw do
   # ルートの設定
   root 'recipes#index'
 
+  # 
+  post 'values/new'
+  post 'procedures/new'
+  post 'recipes/new'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

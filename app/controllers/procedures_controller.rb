@@ -11,4 +11,10 @@ class ProceduresController < ApplicationController
     end
   end
 
+  def new
+  	@foods = Food.where(id: params[:food_id])
+  	@values= params[:value]
+  	@procedures = params[:procedure]
+  end
+
 end
