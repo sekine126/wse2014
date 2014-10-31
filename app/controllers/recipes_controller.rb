@@ -10,6 +10,16 @@ class RecipesController < ApplicationController
   end
 
   def new
+    @foods = Food.where(id: params[:food_id])
+    @values = params[:value]
+    @procedures = params[:procedure]
+
+    @procedures.each do |procedure|
+      if procedure[:text].blank?
+        render :text => "<h1>procedure ERROR</h1>"
+      end
+    end
+
     render :text => params
   end
 
