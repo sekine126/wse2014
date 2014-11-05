@@ -28,6 +28,10 @@ YT_DURATION_TAG_GROUP = "media_group" # 親タグ
 YT_DURATION_TAG = "yt_duration" # タグ
 YT_DURATION_ELEMENT = "seconds" # 要素名
 
+
+# ---------------------------------------------------------------------------
+# 食材関連の定数定義
+# ---------------------------------------------------------------------------
 # 食材カテゴリ
 FD_CATEGORY_MEAT = 1
 FD_CATEGORY_FISH = 2

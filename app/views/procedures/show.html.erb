@@ -15,8 +15,12 @@
 </p>
 
 <% if @procedures.last.id == @procedure.id %>
-  <%= link_to "レシピの詳細へ戻る", recipe_path(@recipe.id) %>
+  <%= link_to recipe_path(@recipe.id) do %>
+    <button type="button" class="btn btn-primary">レシピの詳細へ戻る</button>
+  <% end %>
 <% else %>
-  <%= link_to "次の手順へ", recipe_procedure_path(@recipe.id, @procedure.id+1) %>
+  <%= link_to recipe_procedure_path(@recipe.id, @procedure.id+1) do %>
+    <button type="button" class="btn btn-primary">次の手順へ</button>
+  <% end %>
 <% end %>
 
