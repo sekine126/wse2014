@@ -1,4 +1,4 @@
-<h1>procedures/new</h1>
+<h1>手順の入力</h1>
 
 <%#
 "value"=>
@@ -8,11 +8,12 @@
 "commit"=>"submit", "controller"=>"procedures", "action"=>"new"}
 %>
 
+<%= params %><br>
+
 <%# valueの書き出し %>
 使用食材:<br><br>
 <% @values.each do |value| %>
-	<%= value[:name] %>
-	(<%= value[:category]%>) :
+	<%= value[:name] %> :
 	<%= value[:val] %> <br>
 <% end %>
 
@@ -48,6 +49,7 @@
 		<%= hidden_field_tag "value[][food_id]", value[:food_id] %>
 		<%= hidden_field_tag "value[][name]", value[:name] %>
 		<%= hidden_field_tag "value[][category]", value[:category] %>
+		<%= hidden_field_tag "food_id", value[:food_id] %>
 	<% end %>
 
 
@@ -55,7 +57,7 @@
 	<%= number_field_tag "procedure[][sec]", 0 %>秒
 	<br>
 
-	<%= button_tag :type => "submit", :class =>"btn btn-default" do %>
+	<%= button_tag :type => "submit", :class =>"btn btn-primary" do %>
 		手順の追加
 	<% end %>
 <% end %>
@@ -74,7 +76,7 @@
 		<%= hidden_field_tag "value[][name]", value[:name] %>
 		<%= hidden_field_tag "value[][category]", value[:category] %>
 	<% end %>
-	<%= button_tag :type => "submit", :class =>"btn btn-default" do %>
+	<%= button_tag :type => "submit", :class =>"btn btn-primary" do %>
 		次へ
 	<% end %>
 <% end %>

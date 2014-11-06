@@ -17,6 +17,7 @@ class RecipesController < ApplicationController
     @procedures.each do |procedure|
       if procedure[:text].blank?
         render :text => "<h1>procedure ERROR</h1>"
+        # redirect_to :back, alert: '手順を入力してください'
       end
     end
 
