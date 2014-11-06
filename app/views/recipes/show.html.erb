@@ -1,36 +1,28 @@
-<div>
-  <h1> <%= @recipe.name %>のレシピ </h1>
 
-  <div>
-    <table>
-      <tr>
-        <th>レシピ名</th>
-        <th>レシピID</th>
-        <th>サムネイル画像</th>
-      </tr>
-      <tr>
-        <td><%= @recipe.name %></td>
-        <td><%= @recipe.id %></td>
-        <td><img src="<%= @recipe.pic_file_name %>"></td>
-      </tr>
-    </table>
-  </div>
-
-  <div>
-    <h2> 手順 </h2>
-    <table>
-      <% @procedures.each do |procedure| %>
-        <tr>
-          <td><%= procedure.number %></td>
-          <td><%= procedure.detail %></td>
-        </tr>
-      <% end %>
-    </table>
-  </div>
-
-  <div class="text-right">
-    <%= link_to recipe_procedure_path(@recipe.id, @recipe.procedures.first.id) do %>
-      <button type="button" class="btn btn-primary">スタート</button>
-    <% end %>
-  </div>
+<div class="mb40">
+  <h1> <%= @recipe.name %><small>のレシピ</small></h1>
 </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 mt40">
+      <%= image_tag 'test/test.jpg', :width=>300 %>
+    </div>
+    <div class="col-md-8">
+      <h2>作り方</h2>
+      <blockquote>
+        <dl>
+          <% @procedures.each do |procedure| %>
+            <p>
+            <dt>手順<%= procedure.number %></dt>
+            <dd><%= procedure.detail %></dd>
+            </p>
+          <% end %>
+        </dl>
+      </blockquote>
+      <%= link_to recipe_procedure_path(@recipe.id, @recipe.procedures.first.id) do %>
+        <p><button type="button" class="btn btn-primary">スタート</button></p>
+      <% end %>
+    </div>
+  </div><!-- .row -->
+</div><!-- .container --> 
