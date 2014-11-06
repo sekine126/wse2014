@@ -40,3 +40,12 @@ FD_CATEGORY_EGG = 4
 FD_CATEGORY_RETORT = 5
 FD_CATEGORY_SPICE = 6
 FD_CATEGORY_FURUIT = 7
+
+# 食材名
+FD_NAME_MEAT = "肉"
+FD_NAME_FISH = "魚介"
+FD_NAME_VEGE = "野菜"
+FD_NAME_EGG = "主食・卵乳製品"
+FD_NAME_RETORT = "加工品・乾物・海藻・レトルト"
+FD_NAME_SPICE = "調味料・たれ・ドリンク・スパイス"
+FD_NAME_FURUIT = "フルーツ"

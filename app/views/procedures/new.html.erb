@@ -55,7 +55,26 @@
 	<%= number_field_tag "procedure[][sec]", 0 %>秒
 	<br>
 
-	<%= submit_tag("手順の追加") %>
+	<%= button_tag :type => "submit", :class =>"btn btn-default" do %>
+		手順の追加
+	<% end %>
 <% end %>
 
-<%= link_to "次へ", new_recipe_path(:procedure => params[:procedure], :value => params[:value]) %>
+<%= form_tag '/recipes/new' do %>
+	<% if @procedures %>
+		<% @procedures.each do |procedure| %>
+			<%= hidden_field_tag "procedure[][text]", procedure[:text] %>
+			<%= hidden_field_tag "procedure[][sec]", procedure[:sec] %>
+		<% end %>
+	<% end %>
+
+	<% @values.each do |value| %>
+		<%= hidden_field_tag "value[][val]", value[:val] %>
+		<%= hidden_field_tag "value[][food_id]", value[:food_id] %>
+		<%= hidden_field_tag "value[][name]", value[:name] %>
+		<%= hidden_field_tag "value[][category]", value[:category] %>
+	<% end %>
+	<%= button_tag :type => "submit", :class =>"btn btn-default" do %>
+		次へ
+	<% end %>
+<% end %>
