@@ -1,55 +1,46 @@
 <html>
 <head>
-	<LINK rel="stylesheet" type="text/css" href="new.css">
-    <style type="text/css">
-    html,body {
-        height:100%;
-    }
-    #wrap {
-        height:100%;
-        min-height:300px;
-        position: relative;
-    }
-    #footer {
-        position: absolute;
-        width:100%;
-        height:40px;
-        bottom:30px;
-        background-color: #999;
-    }
-    </style>
+	<!-- <LINK rel="stylesheet" type="text/css" href="new.css"> -->
+    <link href="bootstrap.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="bootstrap.js"></script>
 </head>
 <body>
 <h1>foods/new</h1>
 
 <%= form_tag('/values/new') do %>
 
-    <ul class="tabs">
+    <ul class="nav nav-tabs">
+        <% @categorys.each do |category| %>
+            <li>
+                <% str = "#tab"+category.to_s %>
+                <a href=<%= str %> data-toggle="tab"><%= @cat_name[category - 1] %></a>
+            </li>
+        <% end %>
+    </ul>
 
+    <div id="myTabContent" class="tab-content">
         <% @categorys.each do |category| %>
             <% str = "tab" + category.to_s %>
-            <li>
-                <input type="radio" name="tabs" id=<%= str %> 
-                <% if category == FD_CATEGORY_MEAT %>
-                    <%= 'checked' %>
-                <% end %> />
-                <label for=<%= str %>><%= @cat_name[category - 1] %></label>
-                <% str = "tab-content" + category.to_s %>
-                <div id=<%= str %> class="tab-content">
-                  <p class="wrap">
+            <div class="tab-pane fade" id=<%= str %> >
+                <p>
                     <% @foods.each do |food| %>
                         <% if food[:category] == category %>
                             <%= check_box_tag "select[]", food[:id] %>
                             <%= food[:name] %><br>
                         <% end %>
                     <% end %>
-                    <%= button_tag :type => "submit", :class =>"btn btn-default" do %>
-                      次へ
-                    <% end %>
-                </div>
-            </li>
+                </p>
+            </div>
         <% end %>
-    </ul>
+    </div>
+
+
+    <footer>
+        <%= button_tag :type => "submit", :class =>"btn btn-default" do %>
+            次へ
+        <% end %>
+    </footer>
 
 <% end %>
 </body>
