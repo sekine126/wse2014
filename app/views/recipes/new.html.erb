@@ -6,4 +6,9 @@
 "action"=>"new", "controller"=>"recipes"}
 %>
 
-<%= link_to "登録", root_path %>
+<%= form_for(@recipe) do |f| %>
+<p><%= f.file_field :image %></p>
+<p><%= f.text_field :name %></p>
+<% end %>
+
+<%= link_to "登録", :controller => "recipes", :action => "create"  %>

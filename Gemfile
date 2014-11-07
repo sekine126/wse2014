@@ -29,6 +29,8 @@ gem 'spring',        group: :development
 # Paperclip to store picture file
 gem "paperclip", "~> 4.1"
 
+gem 'aws-sdk'
+
 # Web 上の RESTful API を ActiveRecord のモデルと同じようなインターフェースで利用可能にする
 gem 'activeresource'
 

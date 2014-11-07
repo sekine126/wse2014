@@ -1,5 +1,6 @@
 class Recipe < ActiveRecord::Base
-
+  has_attached_file :image
+ 
   has_many :procedures
   accepts_nested_attributes_for :procedures
 

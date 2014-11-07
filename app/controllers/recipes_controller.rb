@@ -10,6 +10,7 @@ class RecipesController < ApplicationController
   end
 
   def new
+    @recipe = Recipe.new
     @foods = Food.where(id: params[:food_id])
     @values = params[:value]
     @procedures = params[:procedure]
@@ -19,8 +20,11 @@ class RecipesController < ApplicationController
         render :text => "<h1>procedure ERROR</h1>"
       end
     end
+  end
 
-    render :text => params
+  def create
+    @recipe=Recipe.new(params[:recipe])
+    @recipe.save
   end
 
 end
