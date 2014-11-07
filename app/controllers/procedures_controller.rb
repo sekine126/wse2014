@@ -16,23 +16,27 @@ class ProceduresController < ApplicationController
   	@foods = Food.where(id: params[:food_id])
   	@values= params[:value]
   	@procedures = params[:procedure]
-    
+
+
 
     if params[:from_value]
-      @values.each do |value|
-        # valueからの遷移時エラー処理
-        if value[:val].blank?
-          render :text => "<h1>value ERROR</h1>"
-        end
+      if @values.any?{|value| value[:val].blank?}
+        flash[:error] = "未入力項目があります"
+        redirect_to :controller=>"values", :action=>"new", :select => params[:food_id]
       end
     else
-      @procedures.each do |procedure|
-        # 手順追加時のエラー処理
-        if procedure[:text].blank?
-          render :text => "<h1>procedure ERROR</h1>"
+      if params[:procedure].present?
+        if @procedures.any?{|procedure| procedure[:text].blank?}
+          tmp = params[:procedure].pop
+          flash[:error] = "手順を入力してください01"
+          if @procedures.any?{|procedure| procedure[:text].present?}
+            redirect_to :controller=>"procedures", :action=>"new", :procedure => params[:procedure], :value => params[:value], :food_id => params[:food_id]
+          else
+            redirect_to :controller=>"procedures", :action=>"new", :procedure => params[:procedure], :value => params[:value], :food_id => params[:food_id], :from_value=>true
+          end
         end
       end
-    end    
+    end
 
   end
 

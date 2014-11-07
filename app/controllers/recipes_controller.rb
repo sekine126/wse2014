@@ -10,21 +10,14 @@ class RecipesController < ApplicationController
   end
 
   def new
-    @recipe = Recipe.new
     @foods = Food.where(id: params[:food_id])
     @values = params[:value]
     @procedures = params[:procedure]
 
-    @procedures.each do |procedure|
-      if procedure[:text].blank?
-        render :text => "<h1>procedure ERROR</h1>"
-      end
+    if @procedures.blank?
+      flash[:error] = "手順を入力してください03"
+      redirect_to :controller=>"procedures", :action=>"new", :procedure => params[:procedure], :value => params[:value], :food_id => params[:food_id], :from_value=>true
     end
-  end
-
-  def create
-    @recipe=Recipe.new(params[:recipe])
-    @recipe.save
   end
 
 end

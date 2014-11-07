@@ -1,22 +1,42 @@
-<h1> <%= @recipe.name %>の作り方 </h1>
+<div class="title">
+  <h1><strong><%= @recipe.name %></strong><small>の作り方</small></h1>
+</div>
 
-<ul>
-  <li>手順<%= @procedure.number %></li>
-  <li><%= @procedure.detail %></li>
-  <li>動画時間<%= @procedure.sec %>秒</li>
-</ul>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <dl>
+        <div class="procedure-entry">
+          <h4><dt>手順<%= @procedure.number %></dt></h4>
+          <dd><%= @procedure.detail %></dd>
+          <br />
+          <dd class="text-right">時間: <%= @procedure.sec %>秒</dd>
+        </div>
+      </dl>
+    </div>
+  </div><!-- .row -->
+</div><!-- .container --> 
 
-<p>
-<% if @procedure.play %>
-  <iframe type="text/html" width="640" height="360" src=<%= @youtube[:url] %> frameborder="0" allowfullscreen></iframe>
-  <br>
-  動画時間:<%= @youtube[:duration] %>秒
-<% end %>
-</p>
+<div class="movie-container">
+  <% if @procedure.play %>
+    <center>
+      <iframe class="movie text-center" type="text/html" width="640" height="360" src=<%= @youtube[:url] %> frameborder="0" allowfullscreen></iframe>
+      <br>
+      <strong>動画時間:<%= @youtube[:duration] %>秒</strong>
+    </center>
+  <% end %>
+</div>
 
-<% if @procedures.last.id == @procedure.id %>
-  <%= link_to "レシピの詳細へ戻る", recipe_path(@recipe.id) %>
-<% else %>
-  <%= link_to "次の手順へ", recipe_procedure_path(@recipe.id, @procedure.id+1) %>
-<% end %>
+
+<div class="next-btn">
+  <% if @procedures.last.id == @procedure.id %>
+    <%= link_to recipe_path(@recipe.id) do %>
+      <button type="button" class="btn btn-primary">レシピの詳細へ戻る</button>
+    <% end %>
+  <% else %>
+    <%= link_to recipe_procedure_path(@recipe.id, @procedure.id+1) do %>
+      <button type="button" class="btn btn-primary">次の手順へ</button>
+    <% end %>
+  <% end %>
+</div>
 

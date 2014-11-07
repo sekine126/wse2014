@@ -1,19 +1,14 @@
-<h1>values/new</h1>
 
-<%#
-"select"=>["1", "2"], 
-"commit"=>"submit", 
-"controller"=>"values", "action"=>"new"}
-%>
+<h1>食材量の入力</h1>
 
 <%= form_tag ('/procedures/new') do %>
 
   <% @foods.each do |food| %>
-  	<%= food[:name] %>
-  	(<%= food[:category]%>):
 
+  	<%= food[:name] %>:
   	<%# 以下送信データ %>
   	<%= text_field_tag "value[][val]" %><br>
+
 
   	<%= hidden_field_tag "food_id[]", food[:id] %>
   	<%= hidden_field_tag "value[][food_id]", food[:id] %>
@@ -22,8 +17,10 @@
     <%= hidden_field_tag "from_value", true %>
   <% end %>
   <br>
-
-  <%= submit_tag("次へ") %>
+  
+  <%= button_tag :type => "submit", :class =>"btn btn-primary" do %>
+    次へ
+  <% end %>
 
  <% end %>
 <br>

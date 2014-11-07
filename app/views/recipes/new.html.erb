@@ -5,10 +5,4 @@
 "value"=>[{"category"=>"category", "food_id"=>"1", "name"=>"name", "val"=>"value"}, {"category"=>"CATEGORY", "food_id"=>"2", "name"=>"NAME", "val"=>"value"}], 
 "action"=>"new", "controller"=>"recipes"}
 %>
-
-<%= form_for(@recipe) do |f| %>
-<p><%= f.file_field :image %></p>
-<p><%= f.text_field :name %></p>
-<% end %>
-
-<%= link_to "登録", :controller => "recipes", :action => "create"  %>
+<%= params %>

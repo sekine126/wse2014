@@ -1,18 +1,8 @@
-<h1>procedures/new</h1>
-
-<%#
-"value"=>
-[{"val"=>"a", "food_id"=>"1", "name"=>"name", "category"=>"category"}, 
-{"val"=>"b", "food_id"=>"2", "name"=>"NAME", "category"=>"CATEGORY"}], 
-"food_id"=>["1", "2"], 
-"commit"=>"submit", "controller"=>"procedures", "action"=>"new"}
-%>
-
+<h1>手順の入力</h1>
 <%# valueの書き出し %>
-使用食材:<br><br>
+使用食材:<br>
 <% @values.each do |value| %>
-	<%= value[:name] %>
-	(<%= value[:category]%>) :
+	<%= value[:name] %> :
 	<%= value[:val] %> <br>
 <% end %>
 
@@ -21,8 +11,8 @@
 <br>
 
 <%# procedureの書き出し %>
-手順:<br><br>
-<% if @procedures %>
+手順:<br>
+<% if !params[:from_value] %>
 	<% @procedures.each do |procedure| %>
 		<% if procedure[:sec] != "0" %>	
 			<%= procedure[:text] %>:
@@ -36,7 +26,33 @@
 
 <%= form_tag ('/procedures/new') do %>
 	<%# paramsで受け取ったprocedure,valueを遷移先でも保持 %>
-	<% if @procedures %>
+	<% if !params[:from_value] %>
+		<% @procedures.each do |procedure| %>
+			<%= hidden_field_tag "procedure[][text]", procedure[:text] %>
+			<%= hidden_field_tag "procedure[][sec]", procedure[:sec] %>
+		<% end %>
+	<% end %>
+
+	<% @values.each do |value| %>
+		<%= hidden_field_tag "value[][val]", value[:val] %>
+		<%= hidden_field_tag "value[][food_id]", value[:food_id] %>
+		<%= hidden_field_tag "value[][name]", value[:name] %>
+		<%= hidden_field_tag "value[][category]", value[:category] %>
+		<%= hidden_field_tag "food_id", value[:food_id] %>
+	<% end %>
+
+
+	<%= text_field_tag "procedure[][text]"  %>:
+	<%= number_field_tag "procedure[][sec]", 0 %>秒
+	<br>
+
+	<%= button_tag :type => "submit", :class =>"btn btn-primary" do %>
+		手順の追加
+	<% end %>
+<% end %>
+
+<%= form_tag ('/recipes/new') do %>
+	<% if !params[:from_value] %>
 		<% @procedures.each do |procedure| %>
 			<%= hidden_field_tag "procedure[][text]", procedure[:text] %>
 			<%= hidden_field_tag "procedure[][sec]", procedure[:sec] %>
@@ -49,13 +65,7 @@
 		<%= hidden_field_tag "value[][name]", value[:name] %>
 		<%= hidden_field_tag "value[][category]", value[:category] %>
 	<% end %>
-
-
-	<%= text_field_tag "procedure[][text]"  %>:
-	<%= number_field_tag "procedure[][sec]", 0 %>秒
-	<br>
-
-	<%= submit_tag("手順の追加") %>
+	<%= button_tag :type => "submit", :class =>"btn btn-primary" do %>
+		次へ
+	<% end %>
 <% end %>
-
-<%= link_to "次へ", new_recipe_path(:procedure => params[:procedure], :value => params[:value]) %>

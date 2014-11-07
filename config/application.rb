@@ -20,6 +20,8 @@ module Wse2014
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :ja
 
+    config.app_generators.stylesheet_engine :less
+
   end
   
   class ApplicationController < ActionController::Base
