@@ -1,17 +1,6 @@
 <h1>手順の入力</h1>
-
-<%#
-"value"=>
-[{"val"=>"a", "food_id"=>"1", "name"=>"name", "category"=>"category"}, 
-{"val"=>"b", "food_id"=>"2", "name"=>"NAME", "category"=>"CATEGORY"}], 
-"food_id"=>["1", "2"], 
-"commit"=>"submit", "controller"=>"procedures", "action"=>"new"}
-%>
-
-<%= params %><br>
-
 <%# valueの書き出し %>
-使用食材:<br><br>
+使用食材:<br>
 <% @values.each do |value| %>
 	<%= value[:name] %> :
 	<%= value[:val] %> <br>
@@ -22,8 +11,8 @@
 <br>
 
 <%# procedureの書き出し %>
-手順:<br><br>
-<% if @procedures %>
+手順:<br>
+<% if !params[:from_value] %>
 	<% @procedures.each do |procedure| %>
 		<% if procedure[:sec] != "0" %>	
 			<%= procedure[:text] %>:
@@ -37,7 +26,7 @@
 
 <%= form_tag ('/procedures/new') do %>
 	<%# paramsで受け取ったprocedure,valueを遷移先でも保持 %>
-	<% if @procedures %>
+	<% if !params[:from_value] %>
 		<% @procedures.each do |procedure| %>
 			<%= hidden_field_tag "procedure[][text]", procedure[:text] %>
 			<%= hidden_field_tag "procedure[][sec]", procedure[:sec] %>
@@ -62,8 +51,8 @@
 	<% end %>
 <% end %>
 
-<%= form_tag '/recipes/new' do %>
-	<% if @procedures %>
+<%= form_tag ('/recipes/new') do %>
+	<% if !params[:from_value] %>
 		<% @procedures.each do |procedure| %>
 			<%= hidden_field_tag "procedure[][text]", procedure[:text] %>
 			<%= hidden_field_tag "procedure[][sec]", procedure[:sec] %>

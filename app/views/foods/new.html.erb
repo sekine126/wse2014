@@ -1,17 +1,19 @@
 <html>
 <head>
-	<!-- <LINK rel="stylesheet" type="text/css" href="new.css"> -->
     <style type="text/css">
     #checkbox {
       display: inline-block;
       width: 30%;
+      margin-left: 3%;
+    }
+    #button{
+        margin-left: 3%;
     }
     </style>
 </head>
 <body>
    
-<h1>使用食材の選択</h1>
-<!-- <%= params %><br> -->
+<h1>食材の選択</h1>
 
 <%= form_tag('/values/new') do %>
 
@@ -44,7 +46,7 @@
                         <% if food[:category] == category %>
                             <div id="checkbox">
                                 <%= check_box_tag "select[]", food[:id] %>
-                                <%= food[:name] %>&#009;
+                                <%= food[:name] %>
                             </div>
                             
                         <% end %>
@@ -55,7 +57,7 @@
     </div>
 
 
-    <footer>
+    <footer id="button">
         <%= button_tag :type => "submit", :class =>"btn btn-primary" do %>
             次へ
         <% end %>

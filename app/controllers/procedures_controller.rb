@@ -19,20 +19,20 @@ class ProceduresController < ApplicationController
 
 
     if params[:from_value]
-      @values.each do |value|
-        # valueからの遷移時エラー
-        if value[:val].blank?
-
-          render :text => "<h1>value ERROR</h1>"
-          # redirect_to :controller=>"values", :action=>"new", :select => params[:food_id]
-        end
+      if @values.any?{|value| value[:val].blank?}
+        flash[:error] = "未入力項目があります"
+        redirect_to :controller=>"values", :action=>"new", :select => params[:food_id]
       end
     else
-      @procedures.each do |procedure|
-        # 手順追加時のエラー
-        if procedure[:text].blank?
-          render :text => "<h1>procedure ERROR</h1>"
-          # redirect_to :controller=>"procedures", :action=>"new", :procedure => params[:procedure], :value => params[:value], :food_id => params[:food_id], :err=>true
+      if params[:procedure].present?
+        if @procedures.any?{|procedure| procedure[:text].blank?}
+          tmp = params[:procedure].pop
+          flash[:error] = "手順を入力してください01"
+          if @procedures.any?{|procedure| procedure[:text].present?}
+            redirect_to :controller=>"procedures", :action=>"new", :procedure => params[:procedure], :value => params[:value], :food_id => params[:food_id]
+          else
+            redirect_to :controller=>"procedures", :action=>"new", :procedure => params[:procedure], :value => params[:value], :food_id => params[:food_id], :from_value=>true
+          end
         end
       end
     end

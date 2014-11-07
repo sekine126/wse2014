@@ -14,14 +14,10 @@ class RecipesController < ApplicationController
     @values = params[:value]
     @procedures = params[:procedure]
 
-    @procedures.each do |procedure|
-      if procedure[:text].blank?
-        render :text => "<h1>procedure ERROR</h1>"
-        # redirect_to :back, alert: '手順を入力してください'
-      end
+    if @procedures.blank?
+      flash[:error] = "手順を入力してください03"
+      redirect_to :controller=>"procedures", :action=>"new", :procedure => params[:procedure], :value => params[:value], :food_id => params[:food_id], :from_value=>true
     end
-
-    render :text => params
   end
 
 end
