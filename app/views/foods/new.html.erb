@@ -1,68 +1,44 @@
-<html>
-<head>
-    <style type="text/css">
-    #checkbox {
-      display: inline-block;
-      width: 30%;
-      margin-left: 3%;
-    }
-    #button{
-        margin-left: 3%;
-    }
-    </style>
-</head>
-<body>
-   
-<h1>食材の選択</h1>
+<div class="title">
+  <h1><strong>食材の登録</strong><small>＜使う食材の選択＞</small></h1>
+</div>
 
 <%= form_tag('/values/new') do %>
 
-    <ul class="nav nav-tabs">
-        <% @categorys.each do |category| %>
-                <% if category == FD_CATEGORY_MEAT %>
-                    <li class="active">
-                <% else %>
-                    <li>
-                <% end %>
+  <ul class="nav nav-tabs">
+    <% @categorys.each do |category| %>
+      <% if category == FD_CATEGORY_MEAT %>
+        <li class="active">
+      <% else %>
+        <li>
+      <% end %>
 
-                <% str = "#tab"+category.to_s %>
-                <a href=<%= str %> data-toggle="tab"><%= @cat_name[category - 1] %></a>
-            </li>
-        <% end %>
-    </ul>
+      <% str = "#tab"+category.to_s %>
+      <a href=<%= str %> data-toggle="tab"><%= @cat_name[category - 1] %></a>
+      </li>
+    <% end %>
+  </ul>
 
-    <div id="myTabContent" class="tab-content">
-        <% @categorys.each do |category| %>
-            <% str = "tab" + category.to_s %>
-            <% if category == FD_CATEGORY_MEAT %>
-                <div class="tab-pane fade in active" id=<%= str %> >
-            <% else %>
-                <div class="tab-pane fade" id=<%= str %> >
+  <div id="myTabContent" class="tab-content">
+    <% @categorys.each do |category| %>
+      <% str = "tab" + category.to_s %>
+      <% if category == FD_CATEGORY_MEAT %>
+        <div class="tab-pane fade in active" id=<%= str %> >
+      <% else %>
+        <div class="tab-pane fade" id=<%= str %> >
+      <% end %>
+          <% @foods.each do |food| %>
+            <% if food[:category] == category %>
+              <div class="checklist">
+                <%= check_box_tag "select[]", food[:id] %>
+                <%= food[:name] %>
+              </div>
             <% end %>
+          <% end %>
+        </div>
+    <% end %>
+  </div><!-- .tab-content -->
 
-                <p>
-                    <% @foods.each do |food| %>
-
-                        <% if food[:category] == category %>
-                            <div id="checkbox">
-                                <%= check_box_tag "select[]", food[:id] %>
-                                <%= food[:name] %>
-                            </div>
-                            
-                        <% end %>
-                    <% end %>
-                </p>
-            </div>
-        <% end %>
-    </div>
-
-
-    <footer id="button">
-        <%= button_tag :type => "submit", :class =>"btn btn-primary" do %>
-            次へ
-        <% end %>
-    </footer>
-
+  <div class="next-btn">
+    <p><button type="submit" class="btn btn-primary">次へ</button></p>
+  </div>
 <% end %>
-</body>
-</html>
