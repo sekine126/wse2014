@@ -13,6 +13,7 @@
           <div class="controls"><%= text_field_tag "value[][value]" %></div>
         </div>
 
+        <%= hidden_field_tag "food_id[]", food[:id] %>
         <%= hidden_field_tag "value[][food_id]", food[:id] %>
         <%= hidden_field_tag "from_value", true %>
       <% end %>
