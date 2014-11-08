@@ -12,7 +12,7 @@ class ProceduresController < ApplicationController
   end
 
   def new
-  	@foods = Food.where(id: params[:food_id])
+  	@foods = Food.all
   	@values= params[:value]
   	@procedures = params[:procedure]
 

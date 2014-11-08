@@ -2,23 +2,23 @@
   <h1><strong>食材量の登録</strong><small>＜使う食材の量を入力＞</small></h1>
 </div>
 
-<div class="backbrown">
 <%= form_tag ('/procedures/new'), :class=>"form-horizontal" do %>
+  <div class="backbrown">
 
-<div class="control-group">
-    <% @foods.each do |food| %>
-      <div class="val-box">
-        <%= food[:name] %>:
-        <%# 以下送信データ %>
-        <div class="controls"><%= text_field_tag "value[][value]" %></div>
-      </div>
+    <div class="control-group">
+      <% @foods.each do |food| %>
+        <div class="val-box">
+          <%= food[:name] %>:
+          <%# 以下送信データ %>
+          <div class="controls"><%= text_field_tag "value[][value]" %></div>
+        </div>
 
-    <%= hidden_field_tag "value[][food_id]", food[:id] %>
-    <%= hidden_field_tag "from_value", true %>
-  <% end %>
-</div>    
+        <%= hidden_field_tag "value[][food_id]", food[:id] %>
+        <%= hidden_field_tag "from_value", true %>
+      <% end %>
+    </div>    
 
-</div><!-- backbrown -->
+  </div><!-- backbrown -->
   <div class="next-btn">
     <p class="text-right"><button type="submit" class="btn btn-primary">次へ</button></p>
   </div>

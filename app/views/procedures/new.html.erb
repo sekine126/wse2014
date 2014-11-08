@@ -5,7 +5,7 @@
 <%# valueの書き出し %>
 使用食材:<br>
 <% @values.each do |value| %>
-  <%= Food.find(value[:food_id]).name %> :
+  <%= @foods.find(value[:food_id]).name %> :
   <%= value[:value] %> <br>
 <% end %>
 
@@ -37,7 +37,7 @@
   <% end %>
 
   <% @values.each do |value| %>
-    <%= hidden_field_tag "value[][val]", value[:value] %>
+    <%= hidden_field_tag "value[][value]", value[:value] %>
     <%= hidden_field_tag "value[][food_id]", value[:food_id] %>
     <%= hidden_field_tag "food_id", value[:food_id] %>
   <% end %>
