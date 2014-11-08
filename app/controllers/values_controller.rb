@@ -1,3 +1,4 @@
+# coding:utf-8
 class ValuesController < ApplicationController
 	def new
 		if params[:select].blank?
