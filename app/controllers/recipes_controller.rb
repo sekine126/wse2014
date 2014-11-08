@@ -15,7 +15,7 @@ class RecipesController < ApplicationController
     @procedures = params[:procedure]
 
     if @procedures.blank?
-      flash[:error] = "手順を入力してください03"
+      flash[:error] = "手順を入力してください"
       redirect_to :controller=>"procedures", :action=>"new", :procedure => params[:procedure], :value => params[:value], :food_id => params[:food_id], :from_value=>true
     end
   end

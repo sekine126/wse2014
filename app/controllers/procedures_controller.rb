@@ -27,7 +27,7 @@ class ProceduresController < ApplicationController
       if params[:procedure].present?
         if @procedures.any?{|procedure| procedure[:detail].blank?}
           tmp = params[:procedure].pop
-          flash[:error] = "手順を入力してください01"
+          flash[:error] = "手順を入力してください"
           if @procedures.any?{|procedure| procedure[:detail].present?}
             redirect_to :controller=>"procedures", :action=>"new", :procedure => params[:procedure], :value => params[:value], :food_id => params[:food_id]
           else
