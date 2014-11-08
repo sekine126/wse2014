@@ -2,6 +2,27 @@
 
 <h4>ー新しいレシピ：<a href="/recipes/<%= @recipe.id %>"><%= @recipe.name %></a></h4>
 
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <%= image_tag 'test/test.jpg', :width=>350 %>
+    </div>
+    <div class="col-md-4">
+      <h2 style="margin-top:0px"><strong>作り方</strong></h2>
+      <div class="procedure-list">
+        <dl>
+          <% @procedures.each do |procedure| %>
+            <div class="procedure-entry">
+              <dt>手順<%= procedure.number %></dt>
+              <dd><%= procedure.detail %></dd>
+            </div>
+          <% end %>
+        </dl>
+      </div>
+    </div>
+  </div><!-- .row -->
+</div><!-- .container --> 
+
 <div class="next-btn">
   <%= link_to root_path do %>
     <p><button type="button" class="btn btn-primary">TOPに戻る</button></p>

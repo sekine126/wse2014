@@ -1,15 +1,21 @@
 <h3>写真・タイトル</h3>
 
 <%= form_for(@recipe, :url=>{:action=>'create'}) do |f| %>
-<p><%= f.file_field :image %></p>
-<p><%= f.text_field :name %></p>
-	<% @procedures.each do |procedure| %>
-		<%= f.hidden_field :detail, :value => procedure[:detail] %>
-		<%= f.hidden_field :sec, :value => procedure[:sec] %>
-	<% end %>
-	<% @values.each do |value| %>
-		<%= f.hidden_field :value, :value => value[:value] %>
-		<%= f.hidden_field :food_id, :value => value[:food_id] %>
-	<% end %>
-<p><%= f.submit "Create" %></p>
+  <p><%= f.file_field :image %></p>
+  <p><%= f.text_field :name %></p>
+  <% @procedures.each do |procedure| %>
+    <% if procedure[:sec].present? %>
+      <%= hidden_field_tag "procedure[][play]", true %>
+    <% else %>
+      <%= hidden_field_tag "procedure[][play]", false %>
+    <% end %>
+    <%= hidden_field_tag "procedure[][number]", procedure[:number] %>
+    <%= hidden_field_tag "procedure[][detail]", procedure[:detail] %>
+    <%= hidden_field_tag "procedure[][sec]", procedure[:sec] %>
+  <% end %>
+  <% @values.each do |value| %>
+    <%= hidden_field_tag "value[][value]", value[:value] %>
+    <%= hidden_field_tag "value[][food_id]", value[:food_id] %>
+  <% end %>
+  <p><%= f.submit "Create" %></p>
 <% end %>
