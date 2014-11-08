@@ -26,21 +26,23 @@
     <% @procedures.each do |procedure| %>
       <tr class="column">
       <% if procedure[:sec] != "0" %> 
+        <td width="50px"><%= procedure[:number] %>:</td>
         <td><%= procedure[:detail] %></td>
         <td>: <%= procedure[:sec] %>秒 &nbsp;</td>
       <% else %>
+        <td width="50px"><%= procedure[:number] %>:</td>
         <td><%= procedure[:detail] %></td>
         <td></td>
       <% end %>
       </tr>
     <% end %>
-    <!-- </table> -->
   <% end %>
 
   <%= form_tag ('/procedures/new') do %>
     <%# paramsで受け取ったprocedure,valueを遷移先でも保持 %>
     <% if !params[:from_value] %>
       <% @procedures.each do |procedure| %>
+        <%= hidden_field_tag "procedure[][number]", procedure[:number] %>
         <%= hidden_field_tag "procedure[][detail]", procedure[:detail] %>
         <%= hidden_field_tag "procedure[][sec]", procedure[:sec] %>
       <% end %>
@@ -53,11 +55,18 @@
     <% end %>
 
       <tr class="column">
-
+        <% if !params[:from_value] %>
+          <td width="50px"><%= @procedures[-1]['number'].to_i + 1 %>:</td>
+          <%= hidden_field_tag "procedure[][number]", @procedures[-1]['number'].to_i + 1 %>
+        <% else %>
+          <td width="50px">1:</td>
+          <%= hidden_field_tag "procedure[][number]", 1 %>
+        <% end %>
         <td><%= text_field_tag "procedure[][detail]"  %></td>
         <td><%= number_field_tag "procedure[][sec]", 0 %>秒</td>
       </tr>
       <tr>
+        <td width="50px"></td>
         <td></td>
         <td class="add-btn">
           <p><button type="submit" class="btn btn-primary">追加</button></p>
@@ -70,6 +79,12 @@
 <%= form_tag ('/recipes/new') do %>
   <% if !params[:from_value] %>
     <% @procedures.each do |procedure| %>
+      <% if procedure[:sec].present? %>
+        <%= hidden_field_tag "procedure[][play]", true %>
+      <% else %>
+        <%= hidden_field_tag "procedure[][play]", false %>
+      <% end %>
+      <%= hidden_field_tag "procedure[][number]", procedure[:number] %>
       <%= hidden_field_tag "procedure[][detail]", procedure[:detail] %>
       <%= hidden_field_tag "procedure[][sec]", procedure[:sec] %>
     <% end %>
