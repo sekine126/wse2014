@@ -10,7 +10,7 @@
           <h4><dt>手順<%= @procedure.number %></dt></h4>
           <dd><%= @procedure.detail %></dd>
           <br />
-          <dd class="text-right">時間: <%= @procedure.sec %>秒</dd>
+          <dd class="text-right">時間: <%= @procedure.min_text %>分<%= @procedure.sec_text %>秒（<%= @procedure.sec %>秒）</dd>
         </div>
       </dl>
     </div>
