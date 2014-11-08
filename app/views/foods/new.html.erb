@@ -5,7 +5,7 @@
 <%= form_tag('/values/new') do %>
 
   <ul class="nav nav-tabs">
-    <% @categorys.each do |category| %>
+    <% @categories.each do |category| %>
       <% if category == FD_CATEGORY_MEAT %>
         <li class="active">
       <% else %>
@@ -19,7 +19,7 @@
   </ul>
 
   <div id="myTabContent" class="tab-content">
-    <% @categorys.each do |category| %>
+    <% @categories.each do |category| %>
       <% str = "tab" + category.to_s %>
       <% if category == FD_CATEGORY_MEAT %>
         <div class="tab-pane fade in active" id=<%= str %> >

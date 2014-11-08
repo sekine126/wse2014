@@ -19,16 +19,16 @@ class ProceduresController < ApplicationController
 
 
     if params[:from_value]
-      if @values.any?{|value| value[:val].blank?}
+      if @values.any?{|value| value[:value].blank?}
         flash[:error] = "未入力項目があります"
         redirect_to :controller=>"values", :action=>"new", :select => params[:food_id]
       end
     else
       if params[:procedure].present?
-        if @procedures.any?{|procedure| procedure[:text].blank?}
+        if @procedures.any?{|procedure| procedure[:detail].blank?}
           tmp = params[:procedure].pop
           flash[:error] = "手順を入力してください01"
-          if @procedures.any?{|procedure| procedure[:text].present?}
+          if @procedures.any?{|procedure| procedure[:detail].present?}
             redirect_to :controller=>"procedures", :action=>"new", :procedure => params[:procedure], :value => params[:value], :food_id => params[:food_id]
           else
             redirect_to :controller=>"procedures", :action=>"new", :procedure => params[:procedure], :value => params[:value], :food_id => params[:food_id], :from_value=>true
