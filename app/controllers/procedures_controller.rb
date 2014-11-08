@@ -16,8 +16,6 @@ class ProceduresController < ApplicationController
   	@values= params[:value]
   	@procedures = params[:procedure]
 
-
-
     if params[:from_value]
       if @values.any?{|value| value[:value].blank?}
         flash[:error] = "未入力項目があります"
