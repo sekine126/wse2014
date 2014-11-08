@@ -10,7 +10,12 @@
           <% @procedures.each do |procedure| %>
             <div class="procedure-entry">
               <dt>手順<%= procedure.number %></dt>
-              <dd><%= procedure.detail %></dd>
+              <dd>
+              <%= procedure.detail %>
+              <% if procedure.play%>
+                （<%= procedure.sec %>秒）
+              <% end %>
+              </dd>
             </div>
           <% end %>
         </dl>
