@@ -79,7 +79,7 @@
 <%= form_tag ('/recipes/new') do %>
   <% if !params[:from_value] %>
     <% @procedures.each do |procedure| %>
-      <% if procedure[:sec].present? %>
+      <% if procedure[:sec] != 0 %>
         <%= hidden_field_tag "procedure[][play]", true %>
       <% else %>
         <%= hidden_field_tag "procedure[][play]", false %>
