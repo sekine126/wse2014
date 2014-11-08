@@ -1,9 +1,12 @@
-<h1>手順の入力</h1>
+<div class="title">
+  <h1><strong>料理手順の登録</strong><small>＜料理の手順を入力＞</small></h1>
+</div>
+
 <%# valueの書き出し %>
 使用食材:<br>
 <% @values.each do |value| %>
-	<%= value[:name] %> :
-	<%= value[:val] %> <br>
+  <%= @foods.find(value[:food_id]).name %> :
+  <%= value[:value] %> <br>
 <% end %>
 
 <br>
@@ -13,59 +16,55 @@
 <%# procedureの書き出し %>
 手順:<br>
 <% if !params[:from_value] %>
-	<% @procedures.each do |procedure| %>
-		<% if procedure[:sec] != "0" %>	
-			<%= procedure[:text] %>:
-			<%= procedure[:sec] %>sec <br>
-		<% else %>
-			<%= procedure[:text] %><br>
-		<% end %>
-	<% end %>
+  <% @procedures.each do |procedure| %>
+    <% if procedure[:sec] != "0" %>	
+      <%= procedure[:detail] %>:
+      <%= procedure[:sec] %>sec <br>
+    <% else %>
+      <%= procedure[:detail] %><br>
+    <% end %>
+  <% end %>
 <% end %>
 
 
 <%= form_tag ('/procedures/new') do %>
-	<%# paramsで受け取ったprocedure,valueを遷移先でも保持 %>
-	<% if !params[:from_value] %>
-		<% @procedures.each do |procedure| %>
-			<%= hidden_field_tag "procedure[][text]", procedure[:text] %>
-			<%= hidden_field_tag "procedure[][sec]", procedure[:sec] %>
-		<% end %>
-	<% end %>
+  <%# paramsで受け取ったprocedure,valueを遷移先でも保持 %>
+  <% if !params[:from_value] %>
+    <% @procedures.each do |procedure| %>
+      <%= hidden_field_tag "procedure[][detail]", procedure[:detail] %>
+      <%= hidden_field_tag "procedure[][sec]", procedure[:sec] %>
+    <% end %>
+  <% end %>
 
-	<% @values.each do |value| %>
-		<%= hidden_field_tag "value[][val]", value[:val] %>
-		<%= hidden_field_tag "value[][food_id]", value[:food_id] %>
-		<%= hidden_field_tag "value[][name]", value[:name] %>
-		<%= hidden_field_tag "value[][category]", value[:category] %>
-		<%= hidden_field_tag "food_id", value[:food_id] %>
-	<% end %>
+  <% @values.each do |value| %>
+    <%= hidden_field_tag "value[][value]", value[:value] %>
+    <%= hidden_field_tag "value[][food_id]", value[:food_id] %>
+    <%= hidden_field_tag "food_id", value[:food_id] %>
+  <% end %>
 
 
-	<%= text_field_tag "procedure[][text]"  %>:
-	<%= number_field_tag "procedure[][sec]", 0 %>秒
-	<br>
+  <%= text_field_tag "procedure[][detail]"  %>:
+  <%= number_field_tag "procedure[][sec]", 0 %>秒
+  <br>
 
-	<%= button_tag :type => "submit", :class =>"btn btn-primary" do %>
-		手順の追加
-	<% end %>
+  <div class="add-btn">
+    <p><button type="submit" class="btn btn-primary">追加</button></p>
+  </div>
 <% end %>
 
 <%= form_tag ('/recipes/new') do %>
-	<% if !params[:from_value] %>
-		<% @procedures.each do |procedure| %>
-			<%= hidden_field_tag "procedure[][text]", procedure[:text] %>
-			<%= hidden_field_tag "procedure[][sec]", procedure[:sec] %>
-		<% end %>
-	<% end %>
+  <% if !params[:from_value] %>
+    <% @procedures.each do |procedure| %>
+      <%= hidden_field_tag "procedure[][detail]", procedure[:detail] %>
+      <%= hidden_field_tag "procedure[][sec]", procedure[:sec] %>
+    <% end %>
+  <% end %>
 
-	<% @values.each do |value| %>
-		<%= hidden_field_tag "value[][val]", value[:val] %>
-		<%= hidden_field_tag "value[][food_id]", value[:food_id] %>
-		<%= hidden_field_tag "value[][name]", value[:name] %>
-		<%= hidden_field_tag "value[][category]", value[:category] %>
-	<% end %>
-	<%= button_tag :type => "submit", :class =>"btn btn-primary" do %>
-		次へ
-	<% end %>
+  <% @values.each do |value| %>
+    <%= hidden_field_tag "value[][value]", value[:value] %>
+    <%= hidden_field_tag "value[][food_id]", value[:food_id] %>
+  <% end %>
+  <div class="next-btn">
+    <p><button type="submit" class="btn btn-primary">次へ</button></p>
+  </div>
 <% end %>
