@@ -25,14 +25,16 @@
   <% if !params[:from_value] %>
     <% @procedures.each do |procedure| %>
       <tr class="column">
-      <% if procedure[:sec] != "0" %>
-        <td width="50px"><%= procedure[:number] %>:</td>
+      <% if procedure[:min].to_i + procedure[:sec].to_i ==0 %>
+        <td width="5%"><%= procedure[:number] %>:</td>
         <td><%= procedure[:detail] %></td>
-        <td>: <%= procedure[:sec] %>秒 &nbsp;</td>
+        <td width="25%"></td>
+        <td width="25%"></td>
       <% else %>
-        <td width="50px"><%= procedure[:number] %>:</td>
+        <td width="5%"><%= procedure[:number] %>:</td>
         <td><%= procedure[:detail] %></td>
-        <td></td>
+        <td width="25%">: <%= procedure[:min] %>分<%= procedure[:sec] %>秒 &nbsp;</td>
+        <td width="25%"></td>
       <% end %>
       </tr>
     <% end %>
@@ -44,6 +46,7 @@
       <% @procedures.each do |procedure| %>
         <%= hidden_field_tag "procedure[][number]", procedure[:number] %>
         <%= hidden_field_tag "procedure[][detail]", procedure[:detail] %>
+        <%= hidden_field_tag "procedure[][min]", procedure[:min] %>
         <%= hidden_field_tag "procedure[][sec]", procedure[:sec] %>
       <% end %>
     <% end %>
@@ -56,17 +59,19 @@
 
       <tr class="column">
         <% if !params[:from_value] %>
-          <td width="50px"><%= @procedures[-1]['number'].to_i + 1 %>:</td>
+          <td width="5%"><%= @procedures[-1]['number'].to_i + 1 %>:</td>
           <%= hidden_field_tag "procedure[][number]", @procedures[-1]['number'].to_i + 1 %>
         <% else %>
-          <td width="50px">1:</td>
+          <td width="5%">1:</td>
           <%= hidden_field_tag "procedure[][number]", 1 %>
         <% end %>
         <td><%= text_field_tag "procedure[][detail]"  %></td>
-        <td><%= number_field_tag "procedure[][sec]", 0 %>秒</td>
+        <td width="25%"><%= number_field_tag "procedure[][min]", 0, :min=>0 %>分</td>
+        <td width="25%"><%= number_field_tag "procedure[][sec]", 0, :min=>0, :max=>59 %>秒</td>
       </tr>
       <tr>
-        <td width="50px"></td>
+        <td></td>
+        <td></td>
         <td></td>
         <td class="add-btn">
           <p><button type="submit" class="btn btn-primary">追加</button></p>
@@ -79,14 +84,14 @@
 <%= form_tag ('/recipes/new') do %>
   <% if !params[:from_value] %>
     <% @procedures.each do |procedure| %>
-      <% if procedure[:sec] != "0" %>
+      <% if procedure[:min].to_i + procedure[:sec].to_i != 0 %>
         <%= hidden_field_tag "procedure[][play]", true %>
       <% else %>
         <%= hidden_field_tag "procedure[][play]", false %>
       <% end %>
       <%= hidden_field_tag "procedure[][number]", procedure[:number] %>
       <%= hidden_field_tag "procedure[][detail]", procedure[:detail] %>
-      <%= hidden_field_tag "procedure[][sec]", procedure[:sec] %>
+      <%= hidden_field_tag "procedure[][sec]", procedure[:min].to_i * 60 + procedure[:sec].to_i %>
     <% end %>
   <% end %>
 
