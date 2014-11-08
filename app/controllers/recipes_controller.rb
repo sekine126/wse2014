@@ -23,16 +23,48 @@ class RecipesController < ApplicationController
 
   def create
     @recipe = Recipe.new(recipe_params)
-    @procedures = Procedure.new(params[:procedure])
-    @values = Value.new(params[:value])
+    if @recipe.save
+      # do nothing
+    else
+      logger.debug("recipe save failed!")
+    end
 
-    @procedures.recipe = @recipe
-    @values.recipe = @recipe
+    params[:procedure].each { |p| 
+      @procedure = Procedure.new
+      @procedure.play = p[:play]
+      @procedure.number = p[:number]
+      @procedure.detail = p[:detail]
+      @procedure.sec = p[:sec]
+      @procedure.recipe = @recipe
+      logger.debug(@procedure.inspect)
+      if @procedure.save
+        # do nothing
+      else
+        logger.debug("recipe save failed!")
+      end
+    }
 
-    @recipe.save
-    @procedures.save
-    @values.save
+    params[:value].each { |v| 
+      @value = Value.new
+      @value.value = v[:value]
+      @value.food_id = v[:food_id]
+      @value.recipe = @recipe
+      logger.debug(@procedure.inspect)
+      if @value.save
+        # do nothing
+      else
+        logger.debug("value save failed!")
+      end
+    }
+
+    @procedures = @recipe.procedures
+    @values = @recipe.values
+    logger.debug(@procedures.inspect)
+    logger.debug(@values.inspect)
   end
+
+  logger.debug(@procedures.inspect)
+  logger.debug(@values.inspect)
 
   private
     def recipe_params
