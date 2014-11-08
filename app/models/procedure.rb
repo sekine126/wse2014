@@ -12,4 +12,16 @@ class Procedure < ActiveRecord::Base
   	#@values = Value.where(id: params[:select])
   end
 
+  def sec_text
+    sec.to_i % 60
+  end
+
+  def min_text
+    sec.to_i / 60
+  end
+
+  def get_sec(min, sec)
+    min.to_i * 60 + sec.to_i
+  end
+
 end
