@@ -1,1 +1,9 @@
-Recipe Created!
+<h3><strong>登録完了</strong></h3>
+
+<h4>ー新しいレシピ：<a href="/recipes/<%= @recipe.id %>"><%= @recipe.name %></a></h4>
+
+<div class="next-btn">
+  <%= link_to root_path do %>
+    <p><button type="button" class="btn btn-primary">TOPに戻る</button></p>
+  <% end %>
+</div>

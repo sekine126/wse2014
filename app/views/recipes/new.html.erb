@@ -1,17 +1,15 @@
 <h3>写真・タイトル</h3>
 
-<%= form_for(@recipe) do |f| %>
+<%= form_for(@recipe, :url=>{:action=>'create'}) do |f| %>
 <p><%= f.file_field :image %></p>
 <p><%= f.text_field :name %></p>
 	<% @procedures.each do |procedure| %>
-		<%= f.hidden_field :text, :value => procedure[:text] %>
+		<%= f.hidden_field :detail, :value => procedure[:detail] %>
 		<%= f.hidden_field :sec, :value => procedure[:sec] %>
 	<% end %>
 	<% @values.each do |value| %>
-		<%= f.hidden_field :val, :value => value[:val] %>
+		<%= f.hidden_field :value, :value => value[:value] %>
 		<%= f.hidden_field :food_id, :value => value[:food_id] %>
-		<%= f.hidden_field :name, :value => value[:name] %>
-		<%= f.hidden_field :category, :value => value[:category] %>
 	<% end %>
 <p><%= f.submit "Create" %></p>
 <% end %>

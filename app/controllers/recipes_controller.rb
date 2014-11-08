@@ -17,21 +17,23 @@ class RecipesController < ApplicationController
     @recipe=Recipe.new
 
     if @procedures.blank?
-      flash[:error] = "手順を入力してください"
+      flash[:error] = "手順を入力してください03"
       redirect_to :controller=>"procedures", :action=>"new", :procedure => params[:procedure], :value => params[:value], :food_id => params[:food_id], :from_value=>true
     end
   end
 
   def create
     @recipe=Recipe.new(recipe_params)
-    @procedure=Procedure.new(procedure_params)
-    @value=Value.new(value_params)
+    @procedures=Procedure.new(procedure_params)
+    @values=Value.new(value_params)
 
-    respond_to do |format|
-      if @recipe.save && @procedure.save && @value.save
-        format.html { redirect_to @recipe }
-      end
-    end
+    @procedures.recipe = @recipe
+    @values.recipe = @recipe
+
+    @recipe.save
+    @procedures.save
+    @values.save
+
   end
 
   private
@@ -42,7 +44,7 @@ class RecipesController < ApplicationController
     end
 
     def procedure_params
-      params.require(:procedure).permit(
+      params[:recipe].permit(
         :number,
         :detail,
         :sec,
@@ -52,7 +54,7 @@ class RecipesController < ApplicationController
     end
 
     def value_params
-      params[:value].permit(
+      params[:recipe].permit(
         :food_id,
         :recipe_id,
         :value
