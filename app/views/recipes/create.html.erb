@@ -1,27 +1,10 @@
-<h3><strong>登録完了</strong></h3>
+<div class="title">
+  <h1><strong>レシピを登録しました</strong></h1>
+</div>
 
 <h4>ー新しいレシピ：<a href="/recipes/<%= @recipe.id %>"><%= @recipe.name %></a></h4>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-4">
-      <%= image_tag 'test/test.jpg', :width=>350 %>
-    </div>
-    <div class="col-md-4">
-      <h2 style="margin-top:0px"><strong>作り方</strong></h2>
-      <div class="procedure-list">
-        <dl>
-          <% @procedures.each do |procedure| %>
-            <div class="procedure-entry">
-              <dt>手順<%= procedure.number %></dt>
-              <dd><%= procedure.detail %></dd>
-            </div>
-          <% end %>
-        </dl>
-      </div>
-    </div>
-  </div><!-- .row -->
-</div><!-- .container --> 
+<%= render 'show' %>
 
 <div class="next-btn">
   <%= link_to root_path do %>

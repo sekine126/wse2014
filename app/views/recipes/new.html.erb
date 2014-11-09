@@ -1,31 +1,31 @@
 <div class="title">
-  <h1><strong>写真・タイトル</strong></h1>
+  <h1><strong>写真・タイトルの登録</strong><small>＜写真を選択してタイトルを入力＞</small></h1>
 </div>
 <%= form_for(@recipe, :url=>{:action=>'create'}, :class=>"form-horizontal") do |f| %>
 
-<div class="backbrown">
-  <table class="table">
-    <tr align="center" class="column-margin"><td><%= f.file_field :image %></td></tr>
-    <tr align="center" class="column-margin"><td>レシピ名:<%= f.text_field :name %></td></tr>
-  </table>
+  <div class="backbrown">
+    <table class="table">
+      <tr align="center" class="column-margin"><td><%= f.file_field :image %></td></tr>
+      <tr align="center" class="column-margin"><td>レシピ名:<%= f.text_field :name %></td></tr>
+    </table>
 
-  <% @procedures.each do |procedure| %>
-    <% if procedure[:sec].present? %>
-      <%= hidden_field_tag "procedure[][play]", true %>
-    <% else %>
-      <%= hidden_field_tag "procedure[][play]", false %>
+    <% @procedures.each do |procedure| %>
+      <% if procedure[:sec].to_i != 0 %>
+        <%= hidden_field_tag "procedure[][play]", true %>
+      <% else %>
+        <%= hidden_field_tag "procedure[][play]", false %>
+      <% end %>
+      <%= hidden_field_tag "procedure[][number]", procedure[:number] %>
+      <%= hidden_field_tag "procedure[][detail]", procedure[:detail] %>
+      <%= hidden_field_tag "procedure[][sec]", procedure[:sec] %>
     <% end %>
-    <%= hidden_field_tag "procedure[][number]", procedure[:number] %>
-    <%= hidden_field_tag "procedure[][detail]", procedure[:detail] %>
-    <%= hidden_field_tag "procedure[][sec]", procedure[:sec] %>
-  <% end %>
-  <% @values.each do |value| %>
-    <%= hidden_field_tag "value[][value]", value[:value] %>
-    <%= hidden_field_tag "value[][food_id]", value[:food_id] %>
-  <% end %>
-</div><!-- backbrown -->
+    <% @values.each do |value| %>
+      <%= hidden_field_tag "value[][value]", value[:value] %>
+      <%= hidden_field_tag "value[][food_id]", value[:food_id] %>
+    <% end %>
+  </div><!-- backbrown -->
 
   <div class="next-btn">
-    <p><button type="submit" class="btn btn-primary">Create</button></p>
+    <p><button type="submit" class="btn btn-primary">レシピを登録</button></p>
   </div>
 <% end %>
