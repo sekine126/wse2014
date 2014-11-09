@@ -29,8 +29,8 @@
           <% @foods.each do |food| %>
             <% if food[:category] == category %>
               <div class="checklist">
-                <%= check_box_tag "select[]", food[:id] %>
-                <%= food[:name] %>
+                <%= check_box_tag "select[]", food[:id], checked=false, :id=>"food_#{food[:id]}" %>
+                <label for="food_<%= food[:id] %>"><%= food[:name] %></label>
               </div>
             <% end %>
           <% end %>

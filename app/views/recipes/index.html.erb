@@ -1,9 +1,27 @@
-<h1>TOPページ（レシピの一覧検索ページ）</h1>
+<div class="title">
+  <h1><strong>タイタニック角煮（仮）</strong><small>＜レシピを検索＞</small></h1>
+</div>
 
-<ul>
-  <% @recipes.each do |recipe| %>
-    <li>
-    <%= link_to recipe.name, recipe_path(recipe.id) %>
-    </li>
-  <% end %>
-</ul>
+<%= form_tag recipes_path, :method => 'get' do %>
+  <div class="form-search">
+    <%= text_field_tag :search, params[:search], :size=>50 %>
+    <button type="search" class="btn btn-primary btn-search">検索</button>
+  </div>
+<% end %>
+
+<div class="recipe-thmbnails">
+  <ul class="thumbnails">
+    <% @recipes.each do |recipe| %>
+      <div class="thumbnail-block">
+        <%= link_to recipe_path(recipe) do%>
+          <div class="thumbnail">
+            <%= image_tag 'test/test.jpg', :width=>200 %>
+            <div class="caption">
+              <strong><%= recipe.name %></strong>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </ul>
+</div>
