@@ -76,7 +76,8 @@ class RecipesController < ApplicationController
   private
     def recipe_params
       params[:recipe].permit(
-        :name
+        :name,
+        :image
         )
     end
 
