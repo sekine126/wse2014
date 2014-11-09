@@ -7,7 +7,10 @@ class ProceduresController < ApplicationController
     @procedures = Procedure.where(recipe_id: params[:recipe_id])
 
     if @procedure.play
-      keyword = "ラブライブ！" # 動画検索キーワード
+      keyword = params[:key]
+      if keyword.empty?
+        keyword = "ラブライブ！"
+      end
       @youtube = @procedure.search_at_youtube(keyword, @procedure.sec)
     end
   end

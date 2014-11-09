@@ -10,7 +10,9 @@
           <h4><dt>手順<%= @procedure.number %></dt></h4>
           <dd><%= @procedure.detail %></dd>
           <br />
+          <% if @procedure.play %>
           <dd class="text-right">時間: <%= @procedure.min_text %>分<%= @procedure.sec_text %>秒（<%= @procedure.sec %>秒）</dd>
+          <% end %>
         </div>
       </dl>
     </div>
@@ -34,8 +36,9 @@
       <button type="button" class="btn btn-primary">レシピの詳細へ戻る</button>
     <% end %>
   <% else %>
-    <%= link_to recipe_procedure_path(@recipe.id, @procedure.id+1) do %>
-      <button type="button" class="btn btn-primary">次の手順へ</button>
+    <%= form_tag recipe_procedure_path(@recipe.id, @procedure.id+1),:method=>:get do %>
+      <%= hidden_field_tag :key, params[:key] %>
+      <button type="submit" class="btn btn-primary">次の手順へ</button>
     <% end %>
   <% end %>
 </div>

@@ -1,18 +1,20 @@
 <div class="title">
-  <h1><strong><%= @recipe.name %></strong><small>のレシピ</small></h1>
+  <h1><strong><%= @recipe.name %></strong><small>のレシピ</small>
+    <div class="next-btn">
+      <%= link_to recipe_path(@recipe), method: 'DELETE' do %>
+        <p><button type="button" class="btn btn-danger">削除</button></p>
+      <% end %>
+    </div>
+  </h1>
 </div>
+
 
 <%= render 'show' %>
 
-<div class="next-btn">
-  <%= link_to recipe_path(@recipe), method: 'DELETE' do %>
-    <p><button type="button" class="btn btn-danger">削除</button></p>
-  <% end %>
-</div>
-
-<div class="next-btn">
-  <%= link_to recipe_procedure_path(@recipe.id, @recipe.procedures.first.id) do %>
-    <p><button type="button" class="btn btn-primary">スタート</button></p>
+<div class="coock-start">
+  <%= form_tag recipe_procedure_path(@recipe.id, @recipe.procedures.first.id),:method=>:get do %>
+    動画のキーワード：<%= text_field_tag :key, "", :size=>50 %>
+    <button type="submit" class="btn btn-primary">スタート</button>
   <% end %>
 </div>
 
