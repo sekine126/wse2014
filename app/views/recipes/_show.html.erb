@@ -1,7 +1,11 @@
 <div class="container">
   <div class="row">
     <div class="col-md-4">
-      <%= image_tag 'test/test.jpg', :width=>350 %>
+      <% if @recipe.image.present? then %>
+        <%= image_tag @recipe.image.url(:image) %>
+      <% else %>
+        <%= image_tag "noimage.jpg", :width=>350 %>
+      <% end %>
     </div>
     <div class="col-md-4">
       <h2 style="margin-top:0px"><strong>作り方</strong></h2>

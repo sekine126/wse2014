@@ -63,8 +63,15 @@ class RecipesController < ApplicationController
     logger.debug(@values.inspect)
   end
 
-  logger.debug(@procedures.inspect)
-  logger.debug(@values.inspect)
+  def destroy
+    @recipe = Recipe.find(params[:id])
+    @recipe.destroy
+
+    respond_to do |format|
+      format.html { redirect_to(root_url) }
+      format.xml  { head :ok }
+    end
+  end
 
   private
     def recipe_params

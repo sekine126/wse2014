@@ -9,13 +9,17 @@
   </div>
 <% end %>
 
-<div class="recipe-thmbnails">
+<div class="recipe-thumbnails">
   <ul class="thumbnails">
     <% @recipes.each do |recipe| %>
       <div class="thumbnail-block">
-        <%= link_to recipe_path(recipe) do%>
+        <%= link_to recipe_path(recipe) do %>
           <div class="thumbnail">
-            <%= image_tag 'test/test.jpg', :width=>200 %>
+            <% if recipe.image.present? then %>
+              <%= image_tag recipe.image.url(:thumb) %>
+            <% else %>
+              <%= image_tag "noimage.jpg" %>
+            <% end %>
             <div class="caption">
               <strong><%= recipe.name %></strong>
             </div>
