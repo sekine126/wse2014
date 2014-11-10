@@ -19,6 +19,7 @@
   </ul>
 
   <div id="myTabContent" class="tab-content">
+    <% count = 0 %>
     <% @categories.each do |category| %>
       <% str = "tab" + category.to_s %>
       <% if category == FD_CATEGORY_MEAT %>
@@ -26,15 +27,20 @@
       <% else %>
         <div class="tab-pane fade" id=<%= str %> >
       <% end %>
-          <% @foods.each do |food| %>
-            <% if food[:category] == category %>
-              <div class="checklist">
-                <%= check_box_tag "select[]", food[:id], checked=false, :id=>"food_#{food[:id]}" %>
-                <label for="food_<%= food[:id] %>"><%= food[:name] %></label>
-              </div>
+        <% @foods.each do |food| %>
+          <% if food[:category] == category %>
+            <% if food[:id] == @sub_categories[count] %>
+              <% str = "▼"+@sub_name[count].to_s %>
+              <div class="sub-category"><%= str %></div>
+              <% count += 1 %>
             <% end %>
+            <div class="checklist">
+              <%= check_box_tag "select[]", food[:id], checked=false, :id=>"food_#{food[:id]}" %>
+              <label for="food_<%= food[:id] %>"><%= food[:name] %></label>
+            </div>
           <% end %>
-        </div>
+        <% end %>
+      </div>
     <% end %>
   </div><!-- .tab-content -->
 
